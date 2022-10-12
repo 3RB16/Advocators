@@ -3,6 +3,6 @@ from .views import AdvocateDetail , AdvocateList
 
 
 urlpatterns = [
-    path('advocates/' , AdvocateList.as_view(), name = "advocates"),
-    path('advocates/<int:pk>/', AdvocateDetail.as_view(), name="advocates"),
+    path('' , AdvocateList.as_view(), name = "advocates"),
+    path('<int:pk>', AdvocateDetail.as_view(), name="advocates"),
 ]

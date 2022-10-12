@@ -1,28 +1,22 @@
-from email.policy import default
-from wsgiref.validate import validator
 from django.db import models
 from django.core.exceptions import ValidationError
+from companies.models import Companies
+
 
 # Create your models here.
 
-def links_content () : 
+def linksCallable () : 
     return {
         "youtube":"",
         "twitter":"",
         "github":"",
     }
-def company_content():
-    return {
-        "id": None,
-        "name":"",
-        "logo":"",
-        "href":"",
-    }
+
+
 
 def number_validator(num):
     if num < 0:
         raise ValidationError('enter valid number')
-
 
 class Advocates(models.Model):
     name = models.CharField(max_length = 255)
@@ -30,8 +24,11 @@ class Advocates(models.Model):
     short_bio = models.CharField(max_length = 255 , null = True)
     long_bio = models.TextField(blank = True , null = True)
     advocate_years_exp = models.IntegerField(null = True , validators = [number_validator])
-    company = models.JSONField(default = company_content)
-    links = models.JSONField(default = links_content)
+    company = models.ForeignKey(
+                    Companies, on_delete = models.SET_NULL, 
+                    related_name = 'advocates' , null = True
+                )
+    links = models.JSONField(default = linksCallable)
     
     class Meta:
         db_table = 'advocates'

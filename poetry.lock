@@ -52,6 +52,17 @@ Django = ">=1.11"
 six = "*"
 
 [[package]]
+name = "django-jsonfield-backport"
+version = "1.0.5"
+description = "Backport of the cross-DB JSONField model and form fields from Django 3.1."
+category = "main"
+optional = false
+python-versions = ">=3.5"
+
+[package.dependencies]
+Django = ">=2.2"
+
+[[package]]
 name = "djangorestframework"
 version = "3.14.0"
 description = "Web APIs for Django, made easy."
@@ -121,7 +132,7 @@ python-versions = ">=2"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "81b7b1df5db11e20f57ff941bbc24677ede897e81af293b4ba0bb6a1180c94e2"
+content-hash = "840ceef24ac326da2de30ca6617a81e6dc666f3edfc43faeeda05fc1084c8aa7"
 
 [metadata.files]
 asgiref = [
@@ -138,6 +149,10 @@ django-json-field = [
 django-jsonfield = [
     {file = "django-jsonfield-1.4.1.tar.gz", hash = "sha256:f789a0ea1f80b48aff7d6c36dd356ce125dbf1b7cd97a82d315607ac758f50ff"},
     {file = "django_jsonfield-1.4.1-py2.py3-none-any.whl", hash = "sha256:ccb2fe623e1bf7799e49c593b0a89a85084ef8d3debbf26d92a54e27b5305d72"},
+]
+django-jsonfield-backport = [
+    {file = "django-jsonfield-backport-1.0.5.tar.gz", hash = "sha256:40c39b1f1bade47bd2715664de14983f2e0a96175f65abbad2688029c255c685"},
+    {file = "django_jsonfield_backport-1.0.5-py3-none-any.whl", hash = "sha256:727b402bad632e38539b489e48aefa6ffe03cedba76ac1f11b455423b3225a2d"},
 ]
 djangorestframework = [
     {file = "djangorestframework-3.14.0-py3-none-any.whl", hash = "sha256:eb63f58c9f218e1a7d064d17a70751f528ed4e1d35547fdade9aaf4cd103fd08"},
