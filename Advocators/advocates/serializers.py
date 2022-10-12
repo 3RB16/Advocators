@@ -20,7 +20,6 @@ class AdvocateSerializer(serializers.Serializer):
     company = serializers.PrimaryKeyRelatedField(queryset=Companies.objects.all(), many=False)
     links = serializers.JSONField()
     
-
     def to_representation(self, instance):
         response = super().to_representation(instance)
         response['company'] = {
