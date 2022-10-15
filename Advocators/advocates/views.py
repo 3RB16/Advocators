@@ -41,8 +41,11 @@ class AdvocateDetail(APIView):
         return Response(data = {'message' : 'deleted'} , status = status.HTTP_200_OK)
     
     def put(self , request , pk):
-        serializer = AdvocateSerializer(data = request.data,instance = Advocates.objects.get(id = pk))    
-        if serializer.is_valid():
-            serializer.save()
-            return Response(data = {'message' : 'advocate updated'} , status=status.HTTP_200_OK)
+        try:
+            serializer = AdvocateSerializer(data = request.data,instance = Advocates.objects.get(id = pk))    
+            if serializer.is_valid():
+                serializer.save()
+                return Response(data = {'message' : 'advocate updated'} , status=status.HTTP_200_OK)
+        except Advocates.DoesNotExist:
+            return Response(data = {'message' : 'advocate not found'} , status=status.HTTP_404_NOT_FOUND)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
