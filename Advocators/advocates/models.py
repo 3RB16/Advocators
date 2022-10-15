@@ -19,9 +19,9 @@ def number_validator(num):
         raise ValidationError('enter valid number')
 
 class Advocates(models.Model):
-    name = models.CharField(max_length = 255)
+    name = models.CharField(max_length = 255 , null = False , blank = False)
     profile_pic = models.ImageField(unique = True)
-    short_bio = models.CharField(max_length = 255 , null = True)
+    short_bio = models.CharField(max_length = 255 , null = True , blank = True)
     long_bio = models.TextField(blank = True , null = True)
     advocate_years_exp = models.IntegerField(null = True , validators = [number_validator])
     company = models.ForeignKey(
