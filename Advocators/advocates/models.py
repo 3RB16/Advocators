@@ -1,3 +1,4 @@
+from importlib.metadata import requires
 from django.db import models
 from django.core.exceptions import ValidationError
 from companies.models import Companies
@@ -20,7 +21,7 @@ def number_validator(num):
 
 class Advocates(models.Model):
     name = models.CharField(max_length = 255 , null = False , blank = False)
-    profile_pic = models.ImageField(unique = True)
+    profile_pic = models.ImageField(null = True , unique = True)
     short_bio = models.CharField(max_length = 255 , null = True , blank = True)
     long_bio = models.TextField(blank = True , null = True)
     advocate_years_exp = models.IntegerField(null = True , validators = [number_validator])

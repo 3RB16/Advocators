@@ -1,4 +1,3 @@
-from enum import unique
 import json
 from django.core.exceptions import ValidationError
 from rest_framework import serializers
@@ -11,24 +10,25 @@ def number_validator(num):
     if num < 0:
         raise ValidationError('enter valid number')
 
-class AdvocateSerializer(serializers.Serializer):
-    id = serializers.CharField()
+class AdvocateSerializer(serializers.ModelSerializer):
+    id = serializers.CharField(required = False)
     name = serializers.CharField()
-    profile_pic = serializers.ImageField()
+    profile_pic = serializers.URLField()
     short_bio = serializers.CharField()
-    long_bio = serializers.CharField()
+    long_bio = serializers.CharField(required = False)
     advocate_years_exp = serializers.IntegerField(validators = [number_validator])
-    company = serializers.PrimaryKeyRelatedField(queryset=Companies.objects.all(), many=False)
-    links = serializers.JSONField()
+    company = serializers.PrimaryKeyRelatedField(queryset=Companies.objects.all(), many=False , required = False)
+    links = serializers.JSONField(required = False)
     
     def to_representation(self, instance):
         response = super().to_representation(instance)
-        response['company'] = {
-            "id" : instance.company.id,
-            "name" : instance.company.name,
-            "logo" : str(instance.company.logo),
-            "href":"/companies/{0}".format(instance.company.id)
-        }
+        if response['company']:
+            response['company'] = {
+                "id" : instance.company.id,
+                "name" : instance.company.name,
+                "logo" : str(instance.company.logo),
+                "href":"/companies/{0}".format(instance.company.id)
+            }
         return response
 
     class Meta:
